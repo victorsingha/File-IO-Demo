@@ -51,12 +51,19 @@ namespace FileIODemo
         }
         public static void FileCopy()
         {
-            if (File.Exists(path))
+            try
             {
-                File.Copy(path, copy_path);
+                if (File.Exists(path))
+                {
+                    File.Copy(path, copy_path);
+                }
+                else
+                    Console.WriteLine("File Not Exists");
             }
-            else
-                Console.WriteLine("File Not Exists");
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }       
         }
         public static void DeleteFile()
         {
@@ -82,7 +89,6 @@ namespace FileIODemo
             }
             else
                 Console.WriteLine("File Not Exists");
-
         }
         public static void WriteUsingStreamWrite()
         {
@@ -97,7 +103,6 @@ namespace FileIODemo
             }
             else
                 Console.WriteLine("File Not Exists");
-
         }
     }
 }
