@@ -28,44 +28,76 @@ namespace FileIODemo
         }
         public static void ReadAllLines()
         {
-            string[] lines;
-            lines= File.ReadAllLines(path);
-            Console.WriteLine(lines[0]);
-            Console.WriteLine(lines[1]);
+            if (File.Exists(path))
+            {
+                string[] lines;
+                lines = File.ReadAllLines(path);
+                Console.WriteLine(lines[0]);
+                Console.WriteLine(lines[1]);
+            }
+            else
+                Console.WriteLine("File Not Exists");          
         }
         public static void ReadAllText()
         {
-            string lines;
-            lines = File.ReadAllText(path);
-            Console.WriteLine(lines);
+            if (File.Exists(path))
+            {
+                string lines;
+                lines = File.ReadAllText(path);
+                Console.WriteLine(lines);
+            }
+            else
+                Console.WriteLine("File Not Exists");  
         }
         public static void FileCopy()
         {
-            File.Copy(path, copy_path);
+            if (File.Exists(path))
+            {
+                File.Copy(path, copy_path);
+            }
+            else
+                Console.WriteLine("File Not Exists");
         }
         public static void DeleteFile()
         {
-            File.Delete(path);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+            else
+                Console.WriteLine("File Not Exists");
         }
         public static void ReadFromStreamReader()
         {
-            using (StreamReader sr = File.OpenText(path))
+            if (File.Exists(path))
             {
-                string s = "";
-                while((s=sr.ReadLine()) != null)
+                using (StreamReader sr = File.OpenText(path))
                 {
-                    Console.WriteLine(s);
-                } 
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(s);
+                    }
+                }
             }
+            else
+                Console.WriteLine("File Not Exists");
+
         }
         public static void WriteUsingStreamWrite()
         {
-            using(StreamWriter sr = File.AppendText(path))
+            if (File.Exists(path))
             {
-                sr.WriteLine("Hello World- .NET is awesome.");
-                sr.Close();
-                Console.WriteLine(File.ReadAllText(path));
+                using (StreamWriter sr = File.AppendText(path))
+                {
+                    sr.WriteLine("Hello World- .NET is awesome.");
+                    sr.Close();
+                    Console.WriteLine(File.ReadAllText(path));
+                }
             }
+            else
+                Console.WriteLine("File Not Exists");
+
         }
     }
 }
